@@ -24,24 +24,25 @@ function Admin() {
       setDescription('');
       setFile(null);
       setErrorMessage('');
+      fetchStats(); 
     } catch (error) {
       console.error('Error uploading file:', error);
       setErrorMessage('Failed to upload file. Please try again.');
     }
   };
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await axios.get('/api/stats');
-        setStats(response.data);
-        setErrorMessage('');
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-        setErrorMessage('Failed to fetch stats. Please try again.');
-      }
-    };
+  const fetchStats = async () => {
+    try {
+      const response = await axios.get('/api/stats');
+      setStats(response.data);
+      setErrorMessage('');
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+      setErrorMessage('Failed to fetch stats. Please try again.');
+    }
+  };
 
+  useEffect(() => {
     fetchStats();
   }, []);
 

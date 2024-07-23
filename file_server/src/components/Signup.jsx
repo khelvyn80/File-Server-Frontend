@@ -4,11 +4,12 @@ import axios from 'axios';
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user'); // Default role is 'user'
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/signup', { email, password });
+      const response = await axios.post('/api/signup', { email, password, role });
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -34,6 +35,14 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 mb-4 border rounded"
           />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full p-2 mb-4 border rounded"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
           <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Signup</button>
         </form>
       </div>
