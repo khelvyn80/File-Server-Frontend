@@ -46,6 +46,7 @@ function Admin() {
     fetchStats();
   }, []);
 
+  
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">

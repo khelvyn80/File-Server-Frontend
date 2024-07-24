@@ -4,12 +4,18 @@ import axios from 'axios';
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user'); // Default role is 'user'
+  const [confirm, setConfirm] = useState('');
+  const [role, setRole] = useState('USER'); // Default role is 'user'
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/signup', { email, password, role });
+      const response = await axios.post('/api/register', { email, password, confirm, role }, {
+        headers : {
+        'Contet-Type' : 'application/json',
+      },
+    });
+      
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -35,6 +41,15 @@ function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 mb-4 border rounded"
           />
+
+            <input
+              type="password"
+              placeholder='Confirm Password'
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              className="w-full p-2 mb-4 border rounded"
+              />
+
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
